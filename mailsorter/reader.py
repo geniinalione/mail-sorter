@@ -32,4 +32,26 @@ class EmailReader:
         else:
             return(mail[0],"")
         
-    """def _extract_text(self,path:Path):"""
+    def _extract_text(self,path:Path):
+        try:
+            tek = path.read_bytes()
+            best = from_bytes(tek).best()
+            if best is None:
+                raise UnreadableEmailError(f"Сообщение {path.name} не читаемо")
+            else:
+                return str(best)
+        except Exception:
+            raise UnreadableEmailError(f"Сообщение {path.name} не читаемо")
+    def read(self,path:Path) -> EmailMessage:
+        text = self._extract_text(path)
+        head,telo = self._split_headers_body(text)
+        send_subj = self._parse_headers(head)
+        domain = self._extract_domain(send_subj.get("sender",""))
+        return EmailMessage(
+            sender=send_subj.get("sender",""),
+            subject=send_subj.get("subject",""),
+            body = telo,
+            domain=domain,
+            source_path=path,
+            raw=text,
+        )
