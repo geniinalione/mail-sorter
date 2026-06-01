@@ -6,7 +6,10 @@ class Classifier:
     hr_words = ["график","отпуск","больничн","bolnichn"]
     internal_words = ["company.ru", "corp.local", ".internal"]
     support_words = ["ошибк", "помог", "нужны права", "нужен доступ", "перестал", "не мог", "не открыв", "прош", "прос", "не мож"]
+    notifications_words = ["дайджест", "созвон"]
     def classify(self, msg: EmailMessage) -> str:
+        if self._is_notif(msg):
+            return "notifications"
         if self._is_spam(msg):
             return "spam"
         if self._is_critical(msg):
@@ -61,3 +64,8 @@ class Classifier:
             if word in msg.domain:
                 return False
         return True
+    def _is_notifications(self, msg:EmailMessage):
+        text = (msg.subject + " " + msg.body).lower()
+        for word in self.notifications_words:
+            if word in text:
+                return True
