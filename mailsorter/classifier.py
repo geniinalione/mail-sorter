@@ -5,7 +5,7 @@ class Classifier:
     finance_words = ["счет", "счёт", "оплат", "реквизит"]
     hr_words = ["график","отпуск","больничн","bolnichn"]
     internal_words = ["company.ru", "corp.local", ".internal"]
-    support_words = ["ошибк", "помог", "нужны права", "нужен доступ", "перестал", "не мог", "не открыв", "прошу", "просим", "просит","не мож"]
+    support_words = ["ошибк", "помог", "нужны права", "нужен доступ", "перестал", "не мог", "не открыв", "прошу", "просим", "просит","не мож","подготовить доступ"]
     notifications_words = ["дайджест", "созвон","планов"]
     def classify(self, msg: EmailMessage) -> str:
         if self._is_notifications(msg):
