@@ -42,7 +42,7 @@ class EmailReader:
             else:
                 return cur
         except Exception:
-            raise UnreadableEmailError(f"Сообщение {path.name} не читаемо")
+            raise UnreadableEmailError
     def read(self,path:Path) -> EmailMessage:
         text = self._extract_text(path)
         head,telo = self._split_headers_body(text)
