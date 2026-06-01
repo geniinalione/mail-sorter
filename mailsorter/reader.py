@@ -37,6 +37,7 @@ class EmailReader:
             tek = path.read_bytes()
             best = from_bytes(tek).best()
             cur = str(best)
+            cur = cur.replace("\r\n", "\n").replace("\r", "\n")
             if best is None or len(cur.strip()) == 0:
                 raise UnreadableEmailError(f"Сообщение {path.name} не читаемо")
             else:
