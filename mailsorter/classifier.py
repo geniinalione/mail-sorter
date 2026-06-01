@@ -8,7 +8,7 @@ class Classifier:
     support_words = ["ошибк", "помог", "нужны права", "нужен доступ", "перестал", "не мог", "не открыв", "прош", "прос", "не мож"]
     notifications_words = ["дайджест", "созвон"]
     def classify(self, msg: EmailMessage) -> str:
-        if self._is_notif(msg):
+        if self._is_notifications(msg):
             return "notifications"
         if self._is_spam(msg):
             return "spam"
