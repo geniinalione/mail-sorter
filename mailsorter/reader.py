@@ -36,10 +36,11 @@ class EmailReader:
         try:
             tek = path.read_bytes()
             best = from_bytes(tek).best()
-            if best is None:
+            cur = str(best)
+            if best is None or len(cur.strip()) == 0:
                 raise UnreadableEmailError(f"Сообщение {path.name} не читаемо")
             else:
-                return str(best)
+                return cur
         except Exception:
             raise UnreadableEmailError(f"Сообщение {path.name} не читаемо")
     def read(self,path:Path) -> EmailMessage:
