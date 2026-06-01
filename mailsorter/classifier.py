@@ -1,6 +1,6 @@
 from .email_message import EmailMessage
 class Classifier:
-    critical_words = ["массов","сбой","критич"]
+    critical_words = ["массов","сбой","критич","падает"]
     spam_words = ["выигр", "скидк", "акци", "заблокир", "перейдите", "истекает", "бесплатно", "розыгрыш","внимание"]
     def classify(self, msg: EmailMessage) -> str:
         if self._is_spam(msg):
