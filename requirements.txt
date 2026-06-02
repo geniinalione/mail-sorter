@@ -1,2 +1,7 @@
 pytest
 charset-normalizer
+pathlib
+shutil
+logging
+collections
+pytest
